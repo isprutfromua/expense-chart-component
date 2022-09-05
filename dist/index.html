@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/index.8353e49f.css">
+  <title>Graph</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=D0+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <script src="/index.672d4772.js" defer=""></script>
+</head>
+
+<body>
+  <section class="card">
+    <header class="card__header">
+      <p class="card__balance-label">My balance</p>
+      <span class="card__balance">$921.48</span>
+      <svg class="card__logo" width="72" viewbox="0 0 72 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M72 24C72 37.2548 61.2548 48 48 48C34.7452 48 24 37.2548 24 24C24 10.7452 34.7452 0 48 0C61.2548 0 72 10.7452 72 24Z" fill="#382314"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 46C36.1503 46 46 36.1503 46 24C46 11.8497 36.1503 2 24 2C11.8497 2 2 11.8497 2 24C2 36.1503 11.8497 46 24 46ZM24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48Z" fill="white"></path>
+      </svg>
+    </header>
+    <main class="card__body">
+      <h1 class="card__title">Spending - Last 7 days</h1>
+      <div class="card__graph" id="cardGraph">
+        <svg viewbox="0 0 440 205" id="svgWrapper" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="graphWrapper" transform="scale(1,-1) translate(0,-205)">
+          </g>
+        </svg>
+        <span class="card__value" id="cardValue"></span>
+      </div>
+      <footer class="card__footer">
+        <p class="card__total-label">Total of previous week</p>
+        <span class="card__total" id="cardTotal"></span>
+        <p class="card__stats">
+          <span class="card__percents" id="dayPercent"></span>
+          <span class="card__stats-label">of all sum</span>
+        </p>
+      </footer>
+    </main>
+  </section>
+<script src="/expenses-chart-component-main.3464ddca.js"></script></body>
+
+</html>
