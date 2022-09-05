@@ -1,0 +1,171 @@
+@use 'sass/mixins' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+:root {
+    --white: #FFFFFF;
+    --card-white: #FFFBF6;
+    --cream: #F8E9DD;
+    --medium-brown: #92857A;
+    --dark-brown: #382314;
+    --cyan: #76B5BC;
+    --red: #EC755D;
+
+    --label-top: 0px;
+    --label-left: 0px;
+    --label-opacity: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    @include font(15px, 18px, $color: #382314);
+
+    background-color: var(--cream);
+    display: grid;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.3;
+    min-height: 100vh;
+    padding: 2rem;
+    place-items: center;
+}
+
+.card {
+    $card-offset: 2rem;
+
+    display: grid;
+    gap: 24px;
+    width: min(100%, 540px);
+
+    &__header {
+        @include font(15px, 18px, bold, var(--white));
+
+        background-color: var(--red);
+        border-radius: $card-offset;
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        padding-block: clamp($card-offset, 3vw + 1px, 3.2rem);
+        padding-inline: clamp($card-offset, 3vw + 1px, 2.8rem);
+        row-gap: 8px;
+    }
+
+    &__balance-label {
+        @include font(15px, 18px);
+    }
+
+    &__balance {
+        @include font(24px, 32px, bold);
+
+        grid-row: 2;
+    }
+
+    &__logo {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        place-self: center end;
+    }
+
+    &__body {
+        background-color: var(--card-white);
+        border-radius: $card-offset;
+        display: grid;
+        gap: 6.6rem;
+        padding-block: clamp(2.4rem, 3vw + 1px, $card-offset * 2);
+        padding-inline: clamp($card-offset, 3vw + 1px, $card-offset * 2);
+    }
+
+    &__title {
+        @include font(22px, 32px, bold);
+    }
+
+    &__graph {
+        position: relative;
+
+    }
+
+    &__bar-text {
+        fill: var(--medium-brown);
+        text-transform: capitalize;
+        transform: scale(1, -1) translateX(2.5%);
+    }
+
+    &__footer {
+        @include flexbox($alignItems: flex-end, $wrap: wrap, $justifyContent: space-between);
+        @include pseudo(before, true, $height: 2px, $top: -33px, $left: 0, $right: 0) {
+            background-color: var(--cream);
+            border-radius: 1px;
+        }
+    }
+
+    &__stats-label,
+    &__total-label {
+        color: var(--medium-brown);
+    }
+
+    &__total-label {
+        flex: 1 0 100%;
+    }
+
+    &__total {
+        @include font(30px, 48px);
+    }
+
+    &__stats {
+        @include flexbox($alignItems: flex-end, $direction: column);
+    }
+
+    &__percents {
+        font-weight: bold;
+    }
+
+    &__rect {
+        --s: 79%;
+        --l: 64%;
+        --h: 10;
+
+        fill: hsla(var(--h), var(--s), var(--l), 1);
+        rx: 5px;
+        width: 50px;
+        y: 20px;
+
+        @include hover {
+            --s: 100%;
+            --l: 76%;
+
+            cursor: pointer;
+        }
+
+        &.m-active {
+            --h: 187;
+            --s: 35%;
+
+            @include hover {
+                --s: 49%;
+            }
+        }
+    }
+
+    &__value {
+        @include font(18px, 18px, $weight: bold, $color: var(--white));
+
+        background: var(--dark-brown);
+        border-radius: 5px;
+        bottom: var(--label-top);
+        left: 0;
+        left: var(--label-left);
+        line-height: 23px;
+        opacity: var(--label-opacity);
+        padding: 8px;
+        position: absolute;
+        transform: translate(-8px, -80%);
+    }
+}

@@ -1,0 +1,106 @@
+@use 'sass:math';
+
+@mixin flexbox($display: flex,
+    $direction: row,
+    $placeContent: null,
+    $placeItems: null,
+    $wrap: nowrap,
+    $shrink: 0,
+    $grow: 0,
+    $alignContent: null,
+    $justifyContent: null,
+    $alignItems: null,
+    $justifyItems: null) {
+
+    display: $display;
+    flex-direction: $direction;
+
+    @if $placeContent ==null {
+        @if $alignContent {
+            align-content: $alignContent;
+        }
+
+        @if $justifyContent {
+            justify-content: $justifyContent;
+        }
+    }
+
+    @else {
+        place-content: $placeContent;
+    }
+
+    @if $placeItems ==null {
+        @if $alignItems {
+            align-items: $alignItems;
+        }
+
+        @if $justifyItems {
+            justify-items: $justifyItems;
+        }
+    }
+
+    @else {
+        place-items: $placeItems;
+    }
+
+    flex-wrap: $wrap;
+    flex-shrink: $shrink;
+    flex-grow: $grow;
+}
+
+@function strip($n) {
+    @return math.div($n, ($n * 0 + 1));
+}
+
+@mixin font($min, $max, $weight: null, $color: null) {
+    $max-vw: 1439.9px;
+    $min-vw: 768px;
+    // font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+
+    color: $color;
+    font-size: calc(#{$min} + #{strip($max) - strip($min)} * ((100vw - #{$min-vw}) / (#{strip($max-vw)} - #{strip($min-vw)})));
+    font-weight: $weight;
+
+    @media screen and (max-width: #{$min-vw}) {
+        font-size: $min;
+    }
+
+    @media screen and (min-width: #{$max-vw}) {
+        font-size: $max;
+    }
+}
+
+@mixin pseudo($type, $absolute: null, $width: null, $height: null, $top: null, $left: null, $right: null, $bottom: null, $content: null) {
+    position: if($absolute, relative, null);
+
+    &::#{$type} {
+        position: if($absolute, absolute, null);
+        width: $width;
+        height: $height;
+        top: $top;
+        left: $left;
+        right: $right;
+        bottom: $bottom;
+        content: '#{$content}';
+        @content;
+    }
+}
+
+@mixin hover {
+    @media (hover: none) {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+        &:active {
+            @content;
+        }
+    }
+
+    @media (-ms-high-contrast: none),
+    (-ms-high-contrast: active),
+    (-moz-touch-enabled: 0),
+    (hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+}
